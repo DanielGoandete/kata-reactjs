@@ -8,7 +8,8 @@ import refactoring from '../../src/assets/images/refactoring.jpeg'
 const Image = () => {
 
     const [getprices , setprices] = useState([])
-    const [getTotalValue , setTotalValue] = useState([])
+    const [getTotalValue , setTotalValue] = useState()
+    const [getDiscountValue , setDiscountValue] = useState()
     const newList = []
 
     let booksData = [
@@ -38,6 +39,7 @@ const Image = () => {
 
     const showPrice =()=>{
         
+       let total = 0 
        let pricePerID =0
        let noDiscont = 0
        let discount = 0
@@ -56,19 +58,33 @@ const Image = () => {
            }
            
        }
-       if(discount == 1){
 
-       }else if(discount == 2){
-
-       }else if(discount == 3){
-           alert('test')
-           //colocar os discontos na ordem correta amanha
-           setTotalValue((discount * 50) *  0.1 + noDiscont * 50)
-       }else if(discount == 4){
-
-       }else{
-
-       }
+        //Remove discount to make the calc of the corect discount
+        total = pricePerID * 50 - noDiscont * 50
+       alert(discount)
+       if(discount === 1){
+            setTotalValue(total)
+            
+       }else if(discount === 2){
+            discount = total * 0.05
+            setTotalValue(total - discount + noDiscont * 50)
+            setDiscountValue(5)
+       }else if(discount === 3){
+            discount = total * 0.1
+            setTotalValue(total - discount + noDiscont * 50)
+            setDiscountValue(10)
+        }else if(discount === 4){
+            discount = total * 0.2
+            setTotalValue(total - discount + noDiscont * 50)
+            setDiscountValue(20)
+            
+        }else{
+            discount = total * 0.25
+            setTotalValue(total - discount + noDiscont * 50)
+            setDiscountValue(25)
+        }
+       
+       
      
     }
 
@@ -87,8 +103,9 @@ const Image = () => {
                 
            })}
            <div >
-           <p>Total {getprices}</p>
-           <p>{getTotalValue}</p>
+           <p>Prices: {getprices}</p>
+           <p>Discount: {getDiscountValue}%</p>
+           <p>Total to pay:{getTotalValue}</p>
            </div>
         </div>
     )
