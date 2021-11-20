@@ -52,12 +52,12 @@ const Image = () => {
     return (
         <div className="row">
            {
-            booksData.map((bookDetail,index)=>{
+            booksData?.map((bookDetail,index)=>{
                 return(
     
-                    <div className="col" key={index}>
-                      <img src={bookDetail.imgSrc} alt={bookDetail.alt}   width="90%" height="100%" />  
-                      <button className='btn btn-success buttonBuy' onClick={()=> getBookById(bookDetail.id,bookDetail.name,bookDetail.idInsert)}>Buy</button>     
+                    <div className="col"  key={index}>
+                      <img src={bookDetail.imgSrc} alt={bookDetail.alt} data-testid="img"  width="90%" height="100%" />  
+                      <button className='btn btn-success buttonBuy' data-testid="buy" onClick={()=> getBookById(bookDetail.id,bookDetail.name,bookDetail.idInsert)}>Buy</button>     
                     </div>
                     
                 )

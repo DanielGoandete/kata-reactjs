@@ -3,8 +3,8 @@ import {FaTimes} from 'react-icons/fa'
 
 const Payment = ({nameOfBooks,onDelete}) => {
 
-    const [getTotalValue , setTotalValue] = useState()
-    const [getDiscountValue , setDiscountValue] = useState()
+    const [getTotalValue , setTotalValue] = useState(0)
+    const [getDiscountValue , setDiscountValue] = useState(0)
 
     const getCheckout = () =>{
        
@@ -37,7 +37,6 @@ const Payment = ({nameOfBooks,onDelete}) => {
             //if there is books will set the values on the checkout
             noDiscont  = (nameOfBooks.length - discount)* 50 
             pricePerID = nameOfBooks.length * 50
-            alert(pricePerID - noDiscont)
         }else{
             //if there is no books on the basket then will set 0 on the checkout
             noDiscont = 0
@@ -69,17 +68,19 @@ const Payment = ({nameOfBooks,onDelete}) => {
 
     return (
         <div> 
-        <button className='btn btn-success buttonBuy' id="checkout" onClick={()=> getCheckout()}>checkout</button>  
+        <button className='btn btn-success buttonBuy' id="checkout" onClick={()=> getCheckout()}>checkout</button> 
+        <p data-testid="totalDiscount" style={{display:"none"}}>{getDiscountValue}</p> 
         <p id="discount" >Discount: {getDiscountValue}%</p>
-        <p>Total to pay:{getTotalValue}</p>
+        <p data-testid="totalPayment" style={{display:"none"}}>{getTotalValue}</p>
+        <p>Total to pay:{getTotalValue} €</p>
               <table className="table table-dark">
               <thead>
               <tr>
-                  <th scope="col">Your Basket:</th>
+                  <th  data-testid="basket" scope="col">Your Basket:</th>
               </tr>
               </thead>
               <tbody>
-              { nameOfBooks.map((arrValue,index)=> (
+              { nameOfBooks?.map((arrValue,index)=> (
                   <tr key={index}>
                       <th scope="row">{arrValue.name} <FaTimes style={{color:'red', cursor:'pointer'}} onClick={ () => onDelete(arrValue.id)}></FaTimes></th>
                   </tr>

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Welcome Page Snapshot Image test 1`] = `[Function]`;
+
+exports[`Welcome Page Snapshot Payment test 1`] = `[Function]`;
+
+exports[`button buy Snapshot Image test 1`] = `[Function]`;
+
+exports[`button buy Snapshot Payment test 1`] = `[Function]`;
+
+exports[`initial renders Snapshot Image test 1`] = `[Function]`;
+
+exports[`initial renders Snapshot Payment test 1`] = `[Function]`;
+
+exports[`start of Welcome Page Snapshot Image test 1`] = `[Function]`;
+
+exports[`start of Welcome Page Snapshot Payment test 1`] = `[Function]`;
