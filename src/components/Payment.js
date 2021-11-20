@@ -8,44 +8,43 @@ const Payment = ({nameOfBooks,onDelete}) => {
 
     const getCheckout = () =>{
        
-
-        let pricePerID 
+        
         let elem
         let count 
         let discount 
-
         if(nameOfBooks.length > 0){
-        for(let value = 0; value < nameOfBooks.length; value++){
-            
-            elem = nameOfBooks[value].idInsert
-            count=0
-            discount = 1
-            pricePerID =1
-            for(let j = 0; j < nameOfBooks.length; j++){
-                if(elem !== nameOfBooks[j].idInsert){
-                    discount ++
-                    pricePerID++
+            for(let i = 0; i < nameOfBooks.length; i++){
+                elem = nameOfBooks[i].idInsert
+                count=0
+                discount = 1
+                for(let j = 0; j < nameOfBooks.length; j++){
+                    if(elem !== nameOfBooks[j].idInsert){
+                        discount ++
+                    }
                 }
             }
         }
+      //function that will show the prices on checkout  
+      showPrice(discount)
     }
-    showPrice(discount,pricePerID)
-
-    }
 
 
-    const showPrice =(discount,pricePerID)=>{
-        
+    const showPrice =(discount)=>{
+        let pricePerID
         let total = 0 
         let noDiscont
         if(nameOfBooks.length > 0){
+            //if there is books will set the values on the checkout
             noDiscont  = (nameOfBooks.length - discount)* 50 
+            pricePerID = nameOfBooks.length * 50
+            alert(pricePerID - noDiscont)
         }else{
+            //if there is no books on the basket then will set 0 on the checkout
             noDiscont = 0
             pricePerID = 0
             discount = 1
         }
-        total = pricePerID * 50 // - discount * 50
+        total = pricePerID - noDiscont 
         if(discount === 1){
              setTotalValue(total)
              setDiscountValue(0)
@@ -66,8 +65,6 @@ const Payment = ({nameOfBooks,onDelete}) => {
              setTotalValue(total - discount + noDiscont)
              setDiscountValue(25)
          }
- 
-        
      }
 
     return (

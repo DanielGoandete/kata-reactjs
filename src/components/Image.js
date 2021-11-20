@@ -22,16 +22,10 @@ const Image = () => {
         {id:Math.floor(Math.random() * 10000) +1, idInsert:4, name:'Refactoring' ,imgSrc:refactoring,alt:"Working Effectively"}
     ];
   
-    const getPriceById =(id,name,idInsert)=>{
+    const getBookById =(id,name,idInsert)=>{
         
-        if(getprices.length > 0){
-
-            listIds.push([id])
-            listNames.push([name])
-        }else {
-            listIds.push([id])
-            listNames.push([name])
-        }
+        listIds.push([id])
+        listNames.push([name])
         getprices.push(listIds)
         setprices([...getprices])
         getNames.push(listNames)
@@ -39,13 +33,11 @@ const Image = () => {
         const newNameId = {id , name,idInsert}
         getNameAndId.push(newNameId)
         setNameAndId([...getNameAndId])
-
-
     }
 
  
     const deleteBook = (id)=>{
-        
+
         setNameAndId(getNameAndId.filter((nameAndId)=> nameAndId.id !==id))
         for(let listOFPrices of getprices){
             
@@ -55,24 +47,17 @@ const Image = () => {
                 getNameAndId.splice(array)
             }
         }
-       // alert(document.getElementById("discount").innerHTML);
         document.getElementById("checkout").click();
     }
-
-    const test = ()=>{
-
-
-    }
-
     return (
         <div className="row">
            {
             booksData.map((bookDetail,index)=>{
                 return(
-                    
+    
                     <div className="col" key={index}>
                       <img src={bookDetail.imgSrc} alt={bookDetail.alt}   width="90%" height="100%" />  
-                      <button className='btn btn-success buttonBuy' onClick={()=> getPriceById(bookDetail.id,bookDetail.name,bookDetail.idInsert)}>Buy</button>     
+                      <button className='btn btn-success buttonBuy' onClick={()=> getBookById(bookDetail.id,bookDetail.name,bookDetail.idInsert)}>Buy</button>     
                     </div>
                     
                 )
