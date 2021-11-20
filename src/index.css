@@ -13,6 +13,11 @@ body {
   background-color: rgb(219, 187, 23);
 }
 
+.section{
+  width: 30%;
+}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

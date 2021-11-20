@@ -1,91 +1,61 @@
-import { useState } from 'react'
+import React,{ useState } from 'react'
 import cleanCode from '../../src/assets/images/cleanCode.png'
 import cleanCoder from '../../src/assets/images/cleanCoder.png'
 import cleanArchitecture from '../../src/assets/images/cleanArchitecture.jpeg'
 import tdd from '../../src/assets/images/tdd.jpeg'
 import refactoring from '../../src/assets/images/refactoring.jpeg'
+import Payment from './Payment'
 
 const Image = () => {
 
     const [getprices , setprices] = useState([])
-    const [getTotalValue , setTotalValue] = useState()
-    const [getDiscountValue , setDiscountValue] = useState()
-    const newList = []
+    const [getNames , setNames] = useState([])
+    const [getNameAndId , setNameAndId] = useState([])
+    const listIds = []
+    const listNames =[]
 
     let booksData = [
-        {id:0, price:50, imgSrc:cleanCode, alt:"A HandBook of Agile Software Craftmanship"},
-        {id:1, price:50, imgSrc:cleanCoder,alt:"A Code of Conduct Professional Programmers"},
-        {id:2, price:50, imgSrc:cleanArchitecture,alt:"A Craftman's Guide to Software Structure and Design"},
-        {id:3, price:50, imgSrc:tdd,alt:"Test-Driven Development"},
-        {id:4, price:50, imgSrc:refactoring,alt:"Working Effectively"}
+        {id:Math.floor(Math.random() * 10000) +1, idInsert:0, price:50, name:'Clean Code' ,imgSrc:cleanCode, alt:"A HandBook of Agile Software Craftmanship"},
+        {id:Math.floor(Math.random() * 10000) +1, idInsert:1, price:50, name:'Clean Coder' ,imgSrc:cleanCoder,alt:"A Code of Conduct Professional Programmers"},
+        {id:Math.floor(Math.random() * 10000) +1, idInsert:2, price:50, name:'Clean Architecture' ,imgSrc:cleanArchitecture,alt:"A Craftman's Guide to Software Structure and Design"},
+        {id:Math.floor(Math.random() * 10000) +1, idInsert:3, price:50, name:'TDD' ,imgSrc:tdd,alt:"Test-Driven Development"},
+        {id:Math.floor(Math.random() * 10000) +1, idInsert:4, price:50, name:'Refactoring' ,imgSrc:refactoring,alt:"Working Effectively"}
     ];
   
-    const getPriceById =(id)=>{
+    const getPriceById =(id,name,idInsert)=>{
         
-        const newBook = [id]
         if(getprices.length > 0){
 
-            newList.push(newBook)
+            listIds.push([id])
+            listNames.push([name])
         }else {
-
-          newList.push(newBook)
+            listIds.push([id])
+            listNames.push([name])
         }
-        getprices.push(newList)
+        getprices.push(listIds)
         setprices([...getprices])
-        showPrice()
-       // alert(getprices)
+        getNames.push(listNames)
+        setNames([...getNames])
+        const newNameId = {id , name,idInsert}
+        getNameAndId.push(newNameId)
+        setNameAndId([...getNameAndId])
+
+
     }
 
-
-    const showPrice =()=>{
+ 
+    const deleteBook = (id)=>{
         
-       let total = 0 
-       let pricePerID =0
-       let noDiscont = 0
-       let discount = 0
-       let previouslyValue
-       for(let valuesOfId of getprices.sort()){
-          
-        //give the discont in case is diferent id
-           if(parseInt(valuesOfId) !== previouslyValue){
-              discount ++
-              pricePerID ++
-              previouslyValue = parseInt(valuesOfId)
-           } else{
-            noDiscont++
-            pricePerID ++
-            previouslyValue = parseInt(valuesOfId)
-           }
-           
-       }
-
-        //Remove discount to make the calc of the corect discount
-        total = pricePerID * 50 - noDiscont * 50
-       alert(discount)
-       if(discount === 1){
-            setTotalValue(total)
+        setNameAndId(getNameAndId.filter((nameAndId)=> nameAndId.id !==id))
+        for(let listOFPrices of getprices){
             
-       }else if(discount === 2){
-            discount = total * 0.05
-            setTotalValue(total - discount + noDiscont * 50)
-            setDiscountValue(5)
-       }else if(discount === 3){
-            discount = total * 0.1
-            setTotalValue(total - discount + noDiscont * 50)
-            setDiscountValue(10)
-        }else if(discount === 4){
-            discount = total * 0.2
-            setTotalValue(total - discount + noDiscont * 50)
-            setDiscountValue(20)
-            
-        }else{
-            discount = total * 0.25
-            setTotalValue(total - discount + noDiscont * 50)
-            setDiscountValue(25)
+           // will remove the elem from the list 
+             if(parseInt(listOFPrices) === id){
+                let array  = getprices.indexOf(id)
+                getprices.splice(array,1)
+            }
         }
-       
-       
-     
+        document.getElementById("checkout").click();
     }
 
     return (
@@ -96,17 +66,16 @@ const Image = () => {
                     
                     <div className="col" key={index}>
                       <img src={bookDetail.imgSrc} alt={bookDetail.alt}   width="90%" height="100%" />  
-                      <button className='btn btn-success buttonBuy' onClick={()=> getPriceById(bookDetail.id)}>Buy</button>     
+                      <button className='btn btn-success buttonBuy' onClick={()=> getPriceById(bookDetail.id,bookDetail.name,bookDetail.idInsert)}>Buy</button>     
                     </div>
                     
                 )
                 
            })}
-           <div >
-           <p>Prices: {getprices}</p>
-           <p>Discount: {getDiscountValue}%</p>
-           <p>Total to pay:{getTotalValue}</p>
-           </div>
+           <section className='section'>
+           <Payment nameOfBooks={getNameAndId} onDelete={deleteBook}></Payment>
+          
+           </section>
         </div>
     )
 }
