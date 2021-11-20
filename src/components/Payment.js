@@ -13,8 +13,10 @@ const Payment = ({nameOfBooks,onDelete}) => {
         let elem
         let count 
         let discount 
-        for(let value = 0; value < nameOfBooks.length; value++){
 
+        if(nameOfBooks.length > 0){
+        for(let value = 0; value < nameOfBooks.length; value++){
+            
             elem = nameOfBooks[value].idInsert
             count=0
             discount = 1
@@ -26,15 +28,23 @@ const Payment = ({nameOfBooks,onDelete}) => {
                 }
             }
         }
+    }
+    showPrice(discount,pricePerID)
 
-        showPrice(discount,pricePerID)
     }
 
 
     const showPrice =(discount,pricePerID)=>{
         
         let total = 0 
-        let noDiscont = (nameOfBooks.length - discount)* 50 
+        let noDiscont
+        if(nameOfBooks.length > 0){
+            noDiscont  = (nameOfBooks.length - discount)* 50 
+        }else{
+            noDiscont = 0
+            pricePerID = 0
+            discount = 1
+        }
         total = pricePerID * 50 // - discount * 50
         if(discount === 1){
              setTotalValue(total)
@@ -63,8 +73,7 @@ const Payment = ({nameOfBooks,onDelete}) => {
     return (
         <div> 
         <button className='btn btn-success buttonBuy' id="checkout" onClick={()=> getCheckout()}>checkout</button>  
-        <p>Books: </p>
-        <p>Discount: {getDiscountValue}%</p>
+        <p id="discount" >Discount: {getDiscountValue}%</p>
         <p>Total to pay:{getTotalValue}</p>
               <table className="table table-dark">
               <thead>

@@ -15,11 +15,11 @@ const Image = () => {
     const listNames =[]
 
     let booksData = [
-        {id:Math.floor(Math.random() * 10000) +1, idInsert:0, price:50, name:'Clean Code' ,imgSrc:cleanCode, alt:"A HandBook of Agile Software Craftmanship"},
-        {id:Math.floor(Math.random() * 10000) +1, idInsert:1, price:50, name:'Clean Coder' ,imgSrc:cleanCoder,alt:"A Code of Conduct Professional Programmers"},
-        {id:Math.floor(Math.random() * 10000) +1, idInsert:2, price:50, name:'Clean Architecture' ,imgSrc:cleanArchitecture,alt:"A Craftman's Guide to Software Structure and Design"},
-        {id:Math.floor(Math.random() * 10000) +1, idInsert:3, price:50, name:'TDD' ,imgSrc:tdd,alt:"Test-Driven Development"},
-        {id:Math.floor(Math.random() * 10000) +1, idInsert:4, price:50, name:'Refactoring' ,imgSrc:refactoring,alt:"Working Effectively"}
+        {id:Math.floor(Math.random() * 10000) +1, idInsert:0, name:'Clean Code' ,imgSrc:cleanCode, alt:"A HandBook of Agile Software Craftmanship"},
+        {id:Math.floor(Math.random() * 10000) +1, idInsert:1, name:'Clean Coder' ,imgSrc:cleanCoder,alt:"A Code of Conduct Professional Programmers"},
+        {id:Math.floor(Math.random() * 10000) +1, idInsert:2, name:'Clean Architecture' ,imgSrc:cleanArchitecture,alt:"A Craftman's Guide to Software Structure and Design"},
+        {id:Math.floor(Math.random() * 10000) +1, idInsert:3, name:'TDD' ,imgSrc:tdd,alt:"Test-Driven Development"},
+        {id:Math.floor(Math.random() * 10000) +1, idInsert:4, name:'Refactoring' ,imgSrc:refactoring,alt:"Working Effectively"}
     ];
   
     const getPriceById =(id,name,idInsert)=>{
@@ -51,11 +51,17 @@ const Image = () => {
             
            // will remove the elem from the list 
              if(parseInt(listOFPrices) === id){
-                let array  = getprices.indexOf(id)
-                getprices.splice(array,1)
+                let array  = getNameAndId.indexOf(id)
+                getNameAndId.splice(array)
             }
         }
+       // alert(document.getElementById("discount").innerHTML);
         document.getElementById("checkout").click();
+    }
+
+    const test = ()=>{
+
+
     }
 
     return (
