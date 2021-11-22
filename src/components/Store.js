@@ -79,11 +79,11 @@ const Store = () => {
                 })}
                 </div>
                 <p data-testid="basketItens" style={{display:"none"}}>{getCheckoutNumber}</p> 
-                <button className='btn btn-success buttoCheckout' onClick={toPay}>{getCheckoutNumber} item(ns) click in here to go Checkout</button>
+                <button className='btn btn-success buttoCheckout' onClick={toPay}>{getCheckoutNumber} item(s): click in here to go Checkout</button>
             </div>
             <div className='section screen center' id="payment">
                 <Payment nameOfBooks={getNameAndId} onDelete={deleteBook}></Payment>
-                <button className='btn btn-success buttoCheckout' onClick={toBuy}>come back to store</button>
+                <button className='btn btn-success buttoCheckout' onClick={toBuy}>Back to Store</button>
             </div> 
         </div>
         

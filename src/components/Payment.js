@@ -12,7 +12,6 @@ const Payment = ({nameOfBooks,onDelete}) => {
        
         
         setshowCheckout(true);
-        //alert(test)
         let elem
         let count 
         let discount 
@@ -22,8 +21,13 @@ const Payment = ({nameOfBooks,onDelete}) => {
                 count=0
                 discount = 1
                 for(let j = 0; j < nameOfBooks.length; j++){
+                   
                     if(elem !== nameOfBooks[j].idInsert){
+                        console.log('elem',elem)
+                        console.log('nameOfBooks[j].idInsert',nameOfBooks[j].idInsert)
                         discount ++
+                    }else{
+
                     }
                 }
             }
