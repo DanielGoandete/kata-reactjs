@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(88, 81, 78);
 }
 
 .buttonBuy{
@@ -13,6 +14,17 @@ body {
   background-color: rgb(219, 187, 23);
 }
 
+.center{
+  margin-left: 35%;
+  margin-top: 2%;
+}
+.buttoCheckout{
+  margin-top: 10%;
+}
+
+.screen{
+  height: 100vh;
+}
 .section{
   width: 30%;
 }

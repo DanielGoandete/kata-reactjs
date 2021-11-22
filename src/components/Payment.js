@@ -5,10 +5,14 @@ const Payment = ({nameOfBooks,onDelete}) => {
 
     const [getTotalValue , setTotalValue] = useState(0)
     const [getDiscountValue , setDiscountValue] = useState(0)
-
+    const [showCheckout , setshowCheckout] = useState(false)
+   
+    
     const getCheckout = () =>{
        
         
+        setshowCheckout(true);
+        //alert(test)
         let elem
         let count 
         let discount 
@@ -24,6 +28,7 @@ const Payment = ({nameOfBooks,onDelete}) => {
                 }
             }
         }
+       
       //function that will show the prices on checkout  
       showPrice(discount)
     }
@@ -42,6 +47,7 @@ const Payment = ({nameOfBooks,onDelete}) => {
             noDiscont = 0
             pricePerID = 0
             discount = 1
+            setshowCheckout(false);
         }
         total = pricePerID - noDiscont 
         if(discount === 1){
@@ -66,27 +72,31 @@ const Payment = ({nameOfBooks,onDelete}) => {
          }
      }
 
+     
     return (
-        <div> 
-        <button className='btn btn-success buttonBuy' id="checkout" onClick={()=> getCheckout()}>checkout</button> 
-        <p data-testid="totalDiscount" style={{display:"none"}}>{getDiscountValue}</p> 
-        <p id="discount" >Discount: {getDiscountValue}%</p>
-        <p data-testid="totalPayment" style={{display:"none"}}>{getTotalValue}</p>
-        <p>Total to pay:{getTotalValue} €</p>
-              <table className="table table-dark">
+        <div > 
+            <table className="table table-dark">
               <thead>
-              <tr>
-                  <th  data-testid="basket" scope="col">Your Basket:</th>
-              </tr>
+                <tr>
+                    <th  data-testid="basket" scope="col">Your Basket:</th>
+                </tr>
               </thead>
               <tbody>
-              { nameOfBooks?.map((arrValue,index)=> (
-                  <tr key={index}>
-                      <th scope="row">{arrValue.name} <FaTimes style={{color:'red', cursor:'pointer'}} onClick={ () => onDelete(arrValue.id)}></FaTimes></th>
-                  </tr>
-              ))}
+                { nameOfBooks?.map((arrValue,index)=> (
+                    <tr key={index}>
+                        <th scope="row">{arrValue.name} <FaTimes style={{color:'red', cursor:'pointer'}} onClick={ () => onDelete(arrValue.id)}></FaTimes></th>
+                    </tr>
+                ))}
               </tbody>
-          </table>       
+            </table>   
+            <button style={{display:"none"}} className='btn btn-success buttonBuy' id="checkout" onClick={()=> getCheckout()}>checkout</button> 
+            {showCheckout  ? 
+                (<>
+                    <p id="discount" >Discount: {getDiscountValue}%</p>
+                    <p>Total to pay:{getTotalValue} €</p>
+                </>)
+                : ''
+            }
         </div>
     )
 }

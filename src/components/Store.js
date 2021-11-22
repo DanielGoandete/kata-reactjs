@@ -6,11 +6,12 @@ import tdd from '../../src/assets/images/tdd.jpeg'
 import refactoring from '../../src/assets/images/refactoring.jpeg'
 import Payment from './Payment'
 
-const Image = () => {
+const Store = () => {
 
     const [getprices , setprices] = useState([])
     const [getNames , setNames] = useState([])
     const [getNameAndId , setNameAndId] = useState([])
+    const [getCheckoutNumber , setCheckoutNumber] = useState(0)
     const listIds = []
     const listNames =[]
 
@@ -33,6 +34,8 @@ const Image = () => {
         const newNameId = {id , name,idInsert}
         getNameAndId.push(newNameId)
         setNameAndId([...getNameAndId])
+        document.getElementById("checkout").click();
+        setCheckoutNumber(getNameAndId?.length)
     }
 
  
@@ -48,26 +51,42 @@ const Image = () => {
             }
         }
         document.getElementById("checkout").click();
+        setCheckoutNumber(getNameAndId?.length)
     }
+
+    //redirect to payment
+    const toPay = ()=>{
+        document.getElementById('payment').scrollIntoView();
+    }
+    //redirect to store
+    const toBuy = ()=>{
+        document.getElementById('toBuy').scrollIntoView();
+     }
+
+
     return (
-        <div className="row">
-           {
-            booksData?.map((bookDetail,index)=>{
-                return(
-    
-                    <div className="col"  key={index}>
-                      <img src={bookDetail.imgSrc} alt={bookDetail.alt} data-testid="img"  width="90%" height="100%" />  
-                      <button className='btn btn-success buttonBuy' data-testid="buy" onClick={()=> getBookById(bookDetail.id,bookDetail.name,bookDetail.idInsert)}>Buy</button>     
-                    </div>
-                    
-                )
-                
-           })}
-           <section className='section'>
-           <Payment nameOfBooks={getNameAndId} onDelete={deleteBook}></Payment>
-          
-           </section>
+        <div id='toBuy'>
+            <div  className="screen">
+                <div className="row ">
+                {
+                    booksData?.map((bookDetail,index)=>{
+                        return(
+                            <div className="col"  key={index}>
+                            <img src={bookDetail.imgSrc} alt={bookDetail.alt} data-testid="img"  width="90%" height="100%" />  
+                            <button className='btn btn-success buttonBuy' data-testid="buy" onClick={()=> getBookById(bookDetail.id,bookDetail.name,bookDetail.idInsert)}>Buy</button>     
+                            </div>
+                        )
+                })}
+                </div>
+                <p data-testid="basketItens" style={{display:"none"}}>{getCheckoutNumber}</p> 
+                <button className='btn btn-success buttoCheckout' onClick={toPay}>{getCheckoutNumber} item(ns) click in here to go Checkout</button>
+            </div>
+            <div className='section screen center' id="payment">
+                <Payment nameOfBooks={getNameAndId} onDelete={deleteBook}></Payment>
+                <button className='btn btn-success buttoCheckout' onClick={toBuy}>come back to store</button>
+            </div> 
         </div>
+        
     )
 }
-export default Image
+export default Store

@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from "./components/Header";
-import Image from "./components/Image";
+import Store from "./components/Store";
 import './App.css';
 
 
@@ -11,7 +11,7 @@ function App() {
     <div className="App">
         <div className="container">
           <Header></Header>
-          <Image></Image>
+          <Store></Store>
         </div>
     </div>
   );
